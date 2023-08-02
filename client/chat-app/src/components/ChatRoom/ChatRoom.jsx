@@ -58,32 +58,35 @@ const ChatRoom = ({ username, selectedRoom, userColor }) => {
     <div className="room-container">
       <h1>Room {capitalizeFirst(selectedRoom)} </h1>
       <h3>Welcome {username}</h3>
-      <div>
+      <div className="messages-container">
         {messages.map((message, index) => (
           <Message key={index} message={message} />
         ))}
       </div>
-      <form onSubmit={handleSendMessage}>
+      <form className="input-container" onSubmit={handleSendMessage}>
         <input
           type="text"
+          className="input-message"
           value={inputMessage}
           onChange={(e) => setInputMessage(e.target.value)}
           placeholder="Type your message"
         />
         <button
           type="button"
+          className="toggle-emoji-btn"
           onClick={(e) => {
             e.preventDefault();
             setPickerClicked((clicked) => !clicked);
           }}
         >
-          emo
+          &#9786;
         </button>
-        <div className={`picker-container ${pickerClicked ? "show" : ""}`}>
-          <EmojiPicker onEmojiClick={handleEmojiClick} />
-        </div>
+
         <button type="submit" style={{ display: "none" }}></button>
       </form>
+      <div className={`picker-container ${pickerClicked ? "show" : ""}`}>
+        <EmojiPicker onEmojiClick={handleEmojiClick} />
+      </div>
     </div>
   );
 };

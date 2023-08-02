@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import RoomSelector from "../RoomSelector/RoomSelector";
+import "./LoginForm.css";
 
 const LoginForm = ({ onLogin, roomList }) => {
   const [username, setUsername] = useState("");
@@ -39,6 +40,7 @@ const LoginForm = ({ onLogin, roomList }) => {
       <form className="login-form" onSubmit={handleSubmit}>
         <input
           type="text"
+          className="username-input"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           placeholder="Enter your username"
@@ -48,7 +50,11 @@ const LoginForm = ({ onLogin, roomList }) => {
           selectedRoom={selectedRoom}
           onRoomSelect={handleRoomSelect}
         />
-        <button type="submit" disabled={!username || !selectedRoom}>
+        <button
+          className="submit-btn"
+          type="submit"
+          disabled={!username || !selectedRoom}
+        >
           Login
         </button>
       </form>

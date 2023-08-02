@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ChatRoom from "./components/ChatRoom/ChatRoom";
 import LoginForm from "./components/LoginForm/LoginForm";
 import RoomSelector from "./components/RoomSelector/RoomSelector";
+import "./App.css";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -44,6 +45,13 @@ const App = () => {
     <div>
       {user ? (
         <>
+          {roomList.length !== 0 ? (
+            <RoomSelector
+              roomList={roomList}
+              selectedRoom={""}
+              onRoomSelect={handleRoomsSelect}
+            />
+          ) : null}
           <div className="rooms-container">
             {selectedRooms.map((room) => (
               <ChatRoom
@@ -54,14 +62,6 @@ const App = () => {
               />
             ))}
           </div>
-
-          {roomList.length !== 0 ? (
-            <RoomSelector
-              roomList={roomList}
-              selectedRoom={""}
-              onRoomSelect={handleRoomsSelect}
-            />
-          ) : null}
         </>
       ) : (
         <LoginForm

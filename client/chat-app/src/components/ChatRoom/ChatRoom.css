@@ -1,5 +1,10 @@
 .picker-container > .EmojiPickerReact {
   display: none !important;
+  height: 350px !important;
+  width: 40% !important;
+  overflow: scroll !important;
+  position: absolute !important;
+  left: 30% !important;
 }
 
 .picker-container.show > .EmojiPickerReact {
@@ -7,4 +12,37 @@
 }
 
 .room-container {
+  flex: 1 1;
+  margin: 20px;
+  background-color: black;
+  height: 700px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .messages-container {
+    overflow: scroll;
+    text-align: left;
+    margin: 30px;
+    height: 60%;
+  }
+}
+
+.input-container {
+  position: relative;
+
+  .input-message {
+    height: 60px;
+    width: 80%;
+  }
+  .toggle-emoji-btn {
+    position: absolute;
+    top: 20%;
+    right: 13%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 25px;
+  }
 }
