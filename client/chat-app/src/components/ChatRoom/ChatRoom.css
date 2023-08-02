@@ -1,0 +1,7 @@
+.picker-container > .EmojiPickerReact {
+  display: none !important;
+}
+
+.picker-container.show > .EmojiPickerReact {
+  display: block !important;
+}

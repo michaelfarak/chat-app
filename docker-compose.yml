@@ -1,0 +1,24 @@
+version: "2"
+
+services:
+  reactapp:
+    build: client/chat-app
+    ports:
+      - "3000:3000"
+
+  express:
+    build: server
+    ports:
+      - "1337:1337"
+    environment:
+      MONGODB_URI: mongodb://mongo:27017/chatapp
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    restart: always
+    volumes:
+      - .mongo/data:/data/db
+    ports:
+      - "27017:27017"
