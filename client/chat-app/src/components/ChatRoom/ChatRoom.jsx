@@ -5,7 +5,7 @@ import io from "socket.io-client";
 import EmojiPicker from "emoji-picker-react";
 import "./ChatRoom.css";
 
-const ChatRoom = ({ username, selectedRoom }) => {
+const ChatRoom = ({ username, selectedRoom, userColor }) => {
   const [messages, setMessages] = useState([]);
   const [inputMessage, setInputMessage] = useState("");
   const [socket, setSocket] = useState(null);
@@ -33,6 +33,7 @@ const ChatRoom = ({ username, selectedRoom }) => {
     if (inputMessage.trim() !== "") {
       const newMessage = {
         user: username,
+        userColor: userColor,
         text: inputMessage,
         room: selectedRoom,
       };
@@ -54,7 +55,7 @@ const ChatRoom = ({ username, selectedRoom }) => {
     );
 
   return (
-    <div>
+    <div className="room-container">
       <h1>Room {capitalizeFirst(selectedRoom)} </h1>
       <h3>Welcome {username}</h3>
       <div>

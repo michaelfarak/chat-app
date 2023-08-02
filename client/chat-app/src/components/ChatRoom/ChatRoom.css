@@ -5,3 +5,6 @@
 .picker-container.show > .EmojiPickerReact {
   display: block !important;
 }
+
+.room-container {
+}

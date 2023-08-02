@@ -5,6 +5,7 @@ import RoomSelector from "./components/RoomSelector/RoomSelector";
 
 const App = () => {
   const [user, setUser] = useState(null);
+  const [userColor, setUserColor] = useState("");
   const [roomList, setRoomList] = useState([]);
   const [selectedRoom, setSelectedRoom] = useState("");
   const [selectedRooms, setSelectedRooms] = useState([]);
@@ -20,7 +21,7 @@ const App = () => {
       });
   }, []);
 
-  const handleLogin = (username, selectedRoom) => {
+  const handleLogin = (username, selectedRoom, color) => {
     setUser(username);
     setSelectedRoom(selectedRoom);
     setSelectedRooms((prevSelectedRooms) => [
@@ -30,6 +31,7 @@ const App = () => {
     setRoomList((prevRoomList) =>
       prevRoomList.filter((room) => room !== selectedRoom)
     );
+    setUserColor(color);
   };
 
   const handleRoomsSelect = (room) => {
@@ -42,9 +44,14 @@ const App = () => {
     <div>
       {user ? (
         <>
-          <div>
+          <div className="rooms-container">
             {selectedRooms.map((room) => (
-              <ChatRoom key={room} username={user} selectedRoom={room} />
+              <ChatRoom
+                key={room}
+                username={user}
+                selectedRoom={room}
+                userColor={userColor}
+              />
             ))}
           </div>
 

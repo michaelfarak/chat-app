@@ -1,4 +1,3 @@
-// models/chatRoom.js
 const mongoose = require("mongoose");
 
 const chatRoomSchema = new mongoose.Schema({
@@ -9,8 +8,18 @@ const chatRoomSchema = new mongoose.Schema({
   },
   messages: [
     {
-      user: String,
-      text: String,
+      user: {
+        type: String,
+        required: true,
+      },
+      text: {
+        type: String,
+        required: true,
+      },
+      userColor: {
+        type: String,
+        required: true,
+      },
       timestamp: {
         type: Date,
         default: Date.now,

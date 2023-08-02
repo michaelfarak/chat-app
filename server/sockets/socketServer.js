@@ -37,9 +37,9 @@ const chatServer = (server) => {
 
     socket.on("message", async (message) => {
       try {
-        const { user, text, room } = message;
-        await saveMessage(room, user, text);
-        io.to(room).emit("message", { user, text, room });
+        const { room, user, text, userColor } = message;
+        await saveMessage(room, user, text, userColor);
+        io.to(room).emit("message", { room, user, text, userColor });
       } catch (err) {
         console.error("Error saving message to database", err);
       }
