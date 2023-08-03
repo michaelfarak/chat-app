@@ -5,6 +5,7 @@ import io from "socket.io-client";
 import EmojiPicker from "emoji-picker-react";
 import "./ChatRoom.css";
 
+//TODO: Implement edit message ability
 const ChatRoom = ({ username, selectedRoom, userColor }) => {
   const [messages, setMessages] = useState([]);
   const [inputMessage, setInputMessage] = useState("");

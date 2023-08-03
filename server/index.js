@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
 const connectDB = require("./config/db.js");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 const server = require("http").Server(app);
@@ -52,12 +53,16 @@ store.on("error", (error) => {
   console.error("Session store error:", error);
 });
 
+app.use(cookieParser());
 app.use(
   session({
-    secret: process.env.SESSION_SECRET,
+    secret: process.env.SESSION_SECRET || "this-is-a-secret",
     resave: false,
     saveUninitialized: false,
     store: store,
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24,
+    },
   })
 );
 

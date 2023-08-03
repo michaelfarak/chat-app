@@ -13,6 +13,9 @@ const chatServer = (server) => {
   io.on("connection", async (socket) => {
     console.log(`Socket ${socket.id} connected`);
 
+    // TODO: update User in mongo each time he joins a room
+    // so that it can be used when reloading the page
+
     socket.on("joinRoom", async (room) => {
       if (predefinedRooms.includes(room)) {
         socket.join(room);

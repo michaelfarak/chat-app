@@ -24,6 +24,12 @@ router.post("/register", async (req, res) => {
 
     await newUser.save();
 
+    req.session.user = {
+      id: newUser._id,
+      username: newUser.username,
+      color: newUser.color,
+    };
+
     res.status(201).json({ message: "User registered successfully", color });
   } catch (error) {
     console.error("Error registering user:", error);

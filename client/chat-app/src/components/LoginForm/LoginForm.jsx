@@ -6,7 +6,6 @@ import "./LoginForm.css";
 const LoginForm = ({ onLogin, roomList }) => {
   const [username, setUsername] = useState("");
   const [selectedRoom, setSelectedRoom] = useState("");
-  // const [userColor, setUserColor] = useState("");
 
   const API_URL = "http://localhost:1337/register";
 
@@ -17,8 +16,6 @@ const LoginForm = ({ onLogin, roomList }) => {
         const response = await axios.post(API_URL, { username: username });
 
         const { color } = response.data;
-
-        // setUserColor(color);
 
         onLogin(username, selectedRoom, color);
       } catch (error) {

@@ -4,6 +4,8 @@ import LoginForm from "./components/LoginForm/LoginForm";
 import RoomSelector from "./components/RoomSelector/RoomSelector";
 import "./App.css";
 
+//TODO: learn and implement Redux state management
+
 const App = () => {
   const [user, setUser] = useState(null);
   const [userColor, setUserColor] = useState("");
@@ -12,32 +14,38 @@ const App = () => {
   const [selectedRooms, setSelectedRooms] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:1337/rooms")
-      .then((response) => response.json())
-      .then((data) => {
-        setRoomList(data);
-      })
-      .catch((error) => {
-        console.error("Error fetching room list", error);
-      });
+    fetchRoomList();
   }, []);
+
+  const fetchRoomList = async () => {
+    try {
+      const response = await fetch("http://localhost:1337/rooms");
+      const roomListData = await response.json();
+      setRoomList(roomListData);
+    } catch (error) {
+      console.error("Error fetching room list", error);
+    }
+  };
 
   const handleLogin = (username, selectedRoom, color) => {
     setUser(username);
-    setSelectedRoom(selectedRoom);
-    setSelectedRooms((prevSelectedRooms) => [
-      ...prevSelectedRooms,
-      selectedRoom,
-    ]);
-    setRoomList((prevRoomList) =>
-      prevRoomList.filter((room) => room !== selectedRoom)
-    );
     setUserColor(color);
+    setSelectedRoom(selectedRoom);
+    addSelectedRoom(selectedRoom);
+    removeRoomFromList(selectedRoom);
   };
 
   const handleRoomsSelect = (room) => {
     setSelectedRoom(room);
+    addSelectedRoom(room);
+    removeRoomFromList(room);
+  };
+
+  const addSelectedRoom = (room) => {
     setSelectedRooms((prevSelectedRooms) => [...prevSelectedRooms, room]);
+  };
+
+  const removeRoomFromList = (room) => {
     setRoomList((prevRoomList) => prevRoomList.filter((r) => r !== room));
   };
 
@@ -45,13 +53,13 @@ const App = () => {
     <div>
       {user ? (
         <>
-          {roomList.length !== 0 ? (
+          {roomList.length !== 0 && (
             <RoomSelector
               roomList={roomList}
               selectedRoom={""}
               onRoomSelect={handleRoomsSelect}
             />
-          ) : null}
+          )}
           <div className="rooms-container">
             {selectedRooms.map((room) => (
               <ChatRoom

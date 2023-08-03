@@ -1,4 +1,3 @@
-const ChatRoom = require("../models/chatRoom");
 const predefinedRooms = require("../const/predefinedRooms.js");
 
 const getRooms = (req, res) => {

@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+// TODO: update User model to accept array of rooms he joined
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
